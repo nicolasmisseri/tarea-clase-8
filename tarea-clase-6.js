@@ -34,10 +34,11 @@ function validarSalario(salario) {
 
 // Crear elementos HTML
 
-const div = document.querySelector("div");
+const div = document.querySelector("#formulario");
 
 function crearLabelEdad(divIntegrante, index) {
   let label = document.createElement("label");
+  label.className = "form-label m-2";
   divIntegrante.appendChild(label).textContent = "Edad del integrante: ";
 }
 
@@ -50,12 +51,14 @@ function crearInputEdad(divIntegrante, index) {
 
 function crearLabelSalario(divIntegrante, index) {
   let label = document.createElement("label");
+  label.className = "form-label";
   divIntegrante.appendChild(label).textContent = "Salario del integrante: ";
 }
 
 function crearInputSalario(divIntegrante, index) {
   let input = document.createElement("input");
   let inputNuevo = divIntegrante.appendChild(input);
+
   inputNuevo.type = "number";
   inputNuevo.id = `salario${index}`;
 }
@@ -69,6 +72,7 @@ function botonAgregarSalario(divIntegrante, index) {
   let $botonSalario = document.createElement("button");
   divIntegrante.appendChild($botonSalario);
   $botonSalario.textContent = "Agregar Salario";
+  $botonSalario.className = "btn btn-dark m-1";
   $botonSalario.onclick = () => {
     crearLabelSalario(divIntegrante, index);
     crearInputSalario(divIntegrante, index);
@@ -127,7 +131,6 @@ totalSalarios = 0;
 
 function hacerValidaciones() {
   for (let index = 0; index < arrayEdades.length; index++) {
-    console.log(validarEdad(document.querySelector(`#edad${index}`).value));
     if (
       (validarEdad(document.querySelector(`#edad${index}`).value) ===
         "El campo edad no puede estar vacio") |
@@ -219,6 +222,7 @@ function CalcularMenorMayorPromedioYMostrar() {
 const $botonCalcular = document.createElement("button");
 $botonCalcular.innerText = "Calcular";
 $botonCalcular.type = "button";
+$botonCalcular.className = "btn btn-success m-3";
 div.appendChild($botonCalcular);
 
 $botonCalcular.onclick = () => {
@@ -235,6 +239,7 @@ $botonCalcular.onclick = () => {
 const $botonResetear = document.createElement("button");
 $botonResetear.innerText = "Resetear";
 $botonResetear.type = "reset";
+$botonResetear.className = "btn btn-success m-3";
 div.appendChild($botonResetear);
 
 /*
