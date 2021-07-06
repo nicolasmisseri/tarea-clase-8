@@ -5,11 +5,9 @@ function probarValidarEdad() {
   );
 
   console.assert(
-    validarEdad("1.5") === "El campo edad debe ser un numero entero",
+    validarEdad(1.5) === "El campo edad debe ser un numero entero",
     "validarEdad no valido que el numero sea entero"
   );
-
-  console.assert(validarEdad(23) === "", "");
 }
 
 function probarValidarSalario() {
@@ -18,15 +16,15 @@ function probarValidarSalario() {
     "validarSalario no valido que el campo no este vacio"
   );
   console.assert(
-    validarSalario("1.5") === "El campo salario debe ser un numero entero",
+    validarSalario(1.5) === "El campo salario debe ser un numero entero",
     "validarSalario no valido que el numero sea entero"
   );
-  console.assert(validarSalario(23) === "", "");
 }
 
 function hacerPruebas() {
   probarValidarEdad();
   probarValidarSalario();
+  hacerValidaciones();
 }
 
 hacerPruebas();

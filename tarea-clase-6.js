@@ -13,38 +13,23 @@ const cantidadDeIntegrantes = Number(
 
 // VALIDACIONES
 
+const regEx = /^(\d+\,?)+$/;
+
 function validarEdad(edad) {
-  if (edad.value === "") {
-    edad.className = "error";
+  if (edad === "") {
     return "El campo edad no puede estar vacio";
-  } else if (/[0-9]+$/.test(Number(edad.value))) {
-    edad.className = "error";
+  } else if (!regEx.test(edad)) {
     return "El campo edad debe ser un numero entero";
-  } else {
-    return "";
-  }
+  } else return "";
 }
+validarEdad("");
 
 function validarSalario(salario) {
-  if (salario.value === "") {
-    salario.className = "error";
+  if (salario === "") {
     return "El campo salario no pude estar vacio";
-  } else if (/[0-9]+$/.test(Number(salario.value))) {
-    salario.className = "error";
+  } else if (!regEx.test(salario)) {
     return "El campo salario debe ser un numero entero";
-  } else {
-    return "";
-  }
-}
-
-function hacerValidaciones() {
-  for (let index = 0; index < arrayEdades.length; index++) {
-    validarEdad(document.querySelector(`#edad${index}`));
-  }
-
-  for (let index = 0; index < arraySalarios.length; index++) {
-    validarSalario(document.querySelector(`#salario${index}`));
-  }
+  } else return "";
 }
 
 // Crear elementos HTML
@@ -129,7 +114,6 @@ const arraySalarios = [];
 function crearYRellenarArrays() {
   for (let index = 0; index < cantidadDeIntegrantes; index++) {
     let edad = Number(document.querySelector(`#edad${index}`).value);
-    console.log(edad);
     arrayEdades.push(edad);
 
     let salario = Number(document.querySelector(`#salario${index}`).value);
@@ -138,6 +122,37 @@ function crearYRellenarArrays() {
 }
 totalEdades = 0;
 totalSalarios = 0;
+
+// VALIDACIONES
+
+function hacerValidaciones() {
+  for (let index = 0; index < arrayEdades.length; index++) {
+    console.log(validarEdad(document.querySelector(`#edad${index}`).value));
+    if (
+      (validarEdad(document.querySelector(`#edad${index}`).value) ===
+        "El campo edad no puede estar vacio") |
+      (validarEdad(document.querySelector(`#edad${index}`).value) ===
+        "El campo edad debe ser un numero entero")
+    ) {
+      document.querySelector(`#edad${index}`).className = "error";
+    } else if (
+      validarEdad(document.querySelector(`#edad${index}`).value) === ""
+    ) {
+      document.querySelector(`#edad${index}`).className = "";
+    }
+  }
+
+  for (let index = 0; index < arraySalarios.length; index++) {
+    if (
+      (validarSalario(document.querySelector(`#salario${index}`).value) ===
+        "El campo salario no pude estar vacio") |
+      (validarSalario(document.querySelector(`#salario${index}`).value) ===
+        "El campo salario debe ser un numero entero")
+    ) {
+      document.querySelector(`#salario${index}`).className = "error";
+    }
+  }
+}
 
 function CalcularMenorMayorPromedioYMostrar() {
   for (let index = 0; index < arrayEdades.length; index++) {
@@ -209,8 +224,9 @@ div.appendChild($botonCalcular);
 $botonCalcular.onclick = () => {
   crearYRellenarArrays();
 
-  CalcularMenorMayorPromedioYMostrar();
+  hacerValidaciones();
 
+  CalcularMenorMayorPromedioYMostrar();
   return false;
 };
 
